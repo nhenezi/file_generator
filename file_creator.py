@@ -11,28 +11,35 @@ quick = False
 if  len( argv ) > 1:
   if argv[1] == '-f':
     force = True
+  if argv[1] == '-q':
+    quick = True
 
 
 path = raw_input( "Enter directory name (default '/srv/ftp/'): " )
 
-if ( not path ):
+if not path:
   path = '/srv/ftp/'
 
-while 1:
-  num = input( "Number of files to generate on every level( upper limit 1000 ): " )
-  if ( num > 1 and num < 1000 ) or force :
-    break
+if not quick:
+  while 1:
+    num = input( "Number of files to generate on every level( upper limit 1000 ): " )
+    if ( num > 1 and num < 1000 ) or force :
+      break
 
-while 1:
-  dir_depth = input( "How many levels of directories you want (upper limit 10 ): ")
-  if ( dir_depth > 0 and dir_depth < 10 ) or force:
-    break
+  while 1:
+    dir_depth = input( "How many levels of directories you want (upper limit 10 ): ")
+    if ( dir_depth > 0 and dir_depth < 10 ) or force:
+      break
 
 
-while 1:
-  dir_num = input( "How many diretories per level ( upper limit 10 ): ")
-  if ( dir_num > 0 and dir_depth < 10 ) or force:
-    break
+  while 1:
+    dir_num = input( "How many diretories per level ( upper limit 10 ): ")
+    if ( dir_num > 0 and dir_depth < 10 ) or force:
+      break
+else:
+  num = 5
+  dir_depth = 2
+  dir_num = 3
 
 def generate( num, dir_level, dir_num, path ):
   if ( dir_level < 0 ):
